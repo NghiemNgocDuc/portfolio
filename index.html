@@ -53,7 +53,7 @@
   .label-caps { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; }
 
   /* ── RAIL ── */
-  .rail { position:fixed; left:40px; top:130px; display:flex; flex-direction:column; gap:16px; z-index:20; }
+  .rail { position:fixed; left:16px; top:130px; display:flex; flex-direction:column; gap:16px; z-index:20; }
   .rail a { width:44px; height:44px; border-radius:50%; border:1.5px solid var(--accent); color:var(--accent); display:flex; align-items:center; justify-content:center; background:var(--card); transition:background .15s,color .15s,transform .15s; }
   .rail a:hover { background:var(--accent); color:#fff; transform:translateY(-2px); }
   @media (max-width:900px) { .rail { display:none; } }
@@ -398,14 +398,22 @@
     <div class="section-head"><h2 class="display">News</h2></div>
     <div class="info-card news-card">
       <div class="news-item reveal" style="--i:0">
-        <span class="news-date label-caps">Jun 2026</span>
+        <span class="news-date label-caps">Jul 2026</span>
         <div class="news-dot"></div>
         <div class="news-body">
-          <h3>Presented LLM Guardrail at Viettel AI internal demo day</h3>
-          <p>Showed real-time policy-based filtering across 5 LLM providers with sub-100ms overhead.</p>
+          <h3>Accepted to Vietnam AI Innovation Challenge hackathon</h3>
+          <p>Will compete with ~2000 participants in one of Vietnam's largest AI hackathons.</p>
         </div>
       </div>
       <div class="news-item reveal" style="--i:1">
+        <span class="news-date label-caps">May 2026</span>
+        <div class="news-dot"></div>
+        <div class="news-body">
+          <h3>Paper accepted at Surfaces and Interfaces (Elsevier)</h3>
+          <p>Charge-carrier doping &amp; interchain thermal transport in conjugated polymer films.</p>
+        </div>
+      </div>
+      <div class="news-item reveal" style="--i:2">
         <span class="news-date label-caps">May 2026</span>
         <div class="news-dot"></div>
         <div class="news-body">
@@ -413,20 +421,12 @@
           <p>Building knowledge graphs and guardrail systems for production LLM applications.</p>
         </div>
       </div>
-      <div class="news-item reveal" style="--i:2">
+      <div class="news-item reveal" style="--i:3">
         <span class="news-date label-caps">Apr 2026</span>
         <div class="news-dot"></div>
         <div class="news-body">
           <h3>Won Best Use of DigitalOcean at Hack(H)er413</h3>
           <p>Team ShareBooth took the prize for a real-time collaborative photobooth built over 36 hours.</p>
-        </div>
-      </div>
-      <div class="news-item reveal" style="--i:3">
-        <span class="news-date label-caps">Mar 2026</span>
-        <div class="news-dot"></div>
-        <div class="news-body">
-          <h3>Paper accepted at Surfaces and Interfaces (Elsevier)</h3>
-          <p>Charge-carrier doping &amp; interchain thermal transport in conjugated polymer films.</p>
         </div>
       </div>
     </div>
