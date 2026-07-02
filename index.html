@@ -153,6 +153,18 @@
   .edu-meta { display:flex; gap:16px; font-size:0.86rem; color:var(--ink-soft); flex-wrap:wrap; }
   .cert-note { margin-top:22px; padding-top:18px; border-top:1px solid var(--line); font-size:0.88rem; color:var(--ink-soft); }
 
+  /* news timeline */
+  .news-card { padding: 28px 36px; }
+  .news-item { display:grid; grid-template-columns:auto 14px 1fr; gap:12px 16px; padding:18px 0; border-bottom:1px solid var(--line); align-items:start; }
+  .news-item:first-child { padding-top:0; }
+  .news-item:last-child { border-bottom:none; padding-bottom:0; }
+  .news-date { font-size:0.72rem; color:var(--accent); white-space:nowrap; padding-top:2px; min-width:70px; }
+  .news-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); margin-top:6px; justify-self:center; position:relative; }
+  .news-dot::after { content:''; position:absolute; top:14px; left:50%; width:2px; height:calc(100% + 24px); background:var(--line); transform:translateX(-50%); }
+  .news-item:last-child .news-dot::after { display:none; }
+  .news-body h3 { font-size:0.96rem; font-weight:700; margin:0 0 4px; color:var(--ink); }
+  .news-body p { font-size:0.86rem; color:var(--ink-soft); margin:0; }
+
   /* carousel */
   .carousel-section { padding:60px 0 0; position:relative; z-index:1; }
   .social-pills-row { display:flex; justify-content:center; gap:16px; margin-bottom:40px; flex-wrap:wrap; }
@@ -378,6 +390,45 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="block" id="news">
+    <div class="section-head"><h2 class="display">News</h2></div>
+    <div class="info-card news-card">
+      <div class="news-item reveal" style="--i:0">
+        <span class="news-date label-caps">Jun 2026</span>
+        <div class="news-dot"></div>
+        <div class="news-body">
+          <h3>Presented LLM Guardrail at Viettel AI internal demo day</h3>
+          <p>Showed real-time policy-based filtering across 5 LLM providers with sub-100ms overhead.</p>
+        </div>
+      </div>
+      <div class="news-item reveal" style="--i:1">
+        <span class="news-date label-caps">May 2026</span>
+        <div class="news-dot"></div>
+        <div class="news-body">
+          <h3>Started as AI Engineer at Viettel AI</h3>
+          <p>Building knowledge graphs and guardrail systems for production LLM applications.</p>
+        </div>
+      </div>
+      <div class="news-item reveal" style="--i:2">
+        <span class="news-date label-caps">Apr 2026</span>
+        <div class="news-dot"></div>
+        <div class="news-body">
+          <h3>Won Best Use of DigitalOcean at Hack(H)er413</h3>
+          <p>Team ShareBooth took the prize for a real-time collaborative photobooth built over 36 hours.</p>
+        </div>
+      </div>
+      <div class="news-item reveal" style="--i:3">
+        <span class="news-date label-caps">Mar 2026</span>
+        <div class="news-dot"></div>
+        <div class="news-body">
+          <h3>Paper accepted at Surfaces and Interfaces (Elsevier)</h3>
+          <p>Charge-carrier doping &amp; interchain thermal transport in conjugated polymer films.</p>
+        </div>
+      </div>
     </div>
   </section>
 
