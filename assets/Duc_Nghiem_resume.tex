@@ -1,0 +1,363 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.1 cm, % seperation between body and page edge from the top
+    bottom=1.1 cm, % seperation between body and page edge from the bottom
+    left=1.6 cm, % seperation between body and page edge from the left
+    right=1.6 cm, % seperation between body and page edge from the right
+    footskip=0.6 cm, % seperation between body and footer
+    % showframe % for debugging
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 48, 80} % define primary color (Deep Navy Blue)
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Duc Nghiem's CV},
+    pdfauthor={Duc Nghiem},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0cm}
+\makeatletter
+\let\ps@customFooterStyle\ps@plain
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\small Duc Nghiem - CV - Page \thepage{} of \pageref*{LastPage}
+}{}{}
+\makeatother
+\pagestyle{customFooterStyle}
+
+% Modify section title to use primary color
+\titleformat{\section}{\needspace{4\baselineskip}\color{primaryColor}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.08 cm
+}{
+    % bottom space:
+    0.14 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.03 cm,
+        parsep=0.03 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.03 cm,
+        parsep=0.03 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 3.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in June 2026}\hspace{\widthof{Last updated in June 2026}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+    \placelastupdatedtext
+    \begin{header}
+        \color{primaryColor}\textbf{\fontsize{24 pt}{24 pt}\selectfont Duc Nghiem }\\ % Name in primary color
+        \normalsize
+        \mbox{\hrefWithoutArrow{mailto:dnghiem@umass.edu}{\color{primaryColor}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}dnghiem@umass.edu}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{tel:+14132109546}{\color{primaryColor}{\footnotesize\faPhone*}\hspace*{0.13cm}(+1) 413-210-9546}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/nghiem-ngoc-duc/}{\color{primaryColor}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}LinkedIn}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://github.com/NghiemNgocDuc}{\color{primaryColor}{\footnotesize\faGithub}\hspace*{0.13cm}Github}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://scholar.google.com/citations?user=ZozR6tgAAAAJ&hl=en}{\color{primaryColor}{\footnotesize\faGraduationCap}\hspace*{0.13cm}Google Scholar}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://nghiemngocduc.github.io/portfolio/}{\color{primaryColor}{\footnotesize\faGlobe}\hspace*{0.13cm} Portfolio }}%
+    \end{header}
+    \vspace{0.05 cm}
+    \begin{center}
+        \small\color{primaryColor}\textit{Computer Science student at UMass Amherst seeking a Software Engineering/AI Engineering/AI Research Assistant/IT opportunity, with interests in building scalable systems and applying machine learning to real-world problems.}
+    \end{center}
+    \vspace{0.05 cm}
+
+\section{EDUCATION}
+    \begin{twocolentry}{\color{primaryColor}\textit{Amherst, MA\\09/2025 -- 12/2028}} % Date/Location in primary color
+        \color{primaryColor}\textbf{University of Massachusetts Amherst}
+
+        \color{primaryColor}\textit{Bachelor of Science in Computer Science} % Italic content in primary color
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Class Standing: Sophomore.
+            \item GPA: 3.786/4.00.
+            \item Achievements: Dean's List.
+        \end{highlights}
+    \end{onecolentry}
+
+\section{RESEARCH PAPERS AND POSTERS}
+    \begin{highlights}
+        \item Mihir Chandra, Yijie Zhou, Chase Borges, Anna Chatterji, Ilia N Ivanov, \textbf{Duc Nghiem}, et al. (2026). ``Probing Charge-Carrier Doping Effects on Interchain Thermal Transport in Edge-On-Oriented Conjugated Polymer Thin Films.'' \textit{Surfaces and Interfaces} \textbf{(Q1 journal)}. \href{https://www.sciencedirect.com/science/article/abs/pii/S2468023026011855}{\color{primaryColor}\textbf{[Link]}}
+
+        \item Henry Worden, Mihir Chandra, Yijie Zhou, Zarif Ahmad Razin Bhuiyan, Mouyang Cheng, Krishnamurthy Munusamy, \textbf{Duc Nghiem}, et al. (2026). ``Suppressing Thermal Transport in Nonporous Polymer Hybrids by Limiting Thermally Accessible Vibrational Modes.'' \textit{Materials Horizons} \textbf{(Q1 journal)}. \href{https://pubs.rsc.org/en/content/articlelanding/2026/mh/d6mh00633g/unauth}{\color{primaryColor}\textbf{[Link]}}
+
+        \item \textbf{MassURC Conference Presenter}: Designed, presented the abstract and poster ``Intermittent Machine Learning for Battery-Free Environmental Sensing Under Solar Power'' alongside over 1,000 presenters and visitors. \href{https://drive.google.com/file/d/1O7UtcfBeMW_6hkVAZdXeO6UL-9rr1e4Q/view?usp=sharing}{\color{primaryColor}\textbf{[Link]}}
+    \end{highlights}
+
+\section{INTERNSHIP}
+    \begin{twocolentry}{\color{primaryColor}\textit{Hanoi, Vietnam\\
+05/2026 -- 08/2026}}
+        \href{https://viettelai.vn/en}{\color{primaryColor}\textbf{Viettel AI}}
+
+        \color{primaryColor}\textit{AI Engineer} % Italic content in primary color
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Built FastGraphRAG/LightRAG/Microsoft GraphRAG backend services with Neo4j for Vietnamese government legal documents used by thousands of users, developing the end-to-end pipeline from PDF processing with Marker to improve the workflow and entity extraction to knowledge graph construction and multi-hop RAG retrieval via APIs.
+
+            \item Built an MCP server for Viettel Agent to generate legal-document videos through HyperFrame and developed a Chatwoot-based Facebook chatbot, integrating AI-powered legal information retrieval and automated user interactions, reducing the need for human intervention.
+
+            
+            
+        \end{highlights}
+    \end{onecolentry}
+
+\section{RESEARCH EXPERIENCE}
+    \begin{twocolentry}{\color{primaryColor}\textit{Remote, NY\\05/2026 -- Present}} % Date/Location in primary color
+        \href{https://www.cs.stonybrook.edu/people/faculty/tengfeima}{\color{primaryColor}\textbf{SBU Graph Lab - Professor Tengfei Ma}}
+
+        \color{primaryColor}\textit{Student Researcher} % Italic content in primary color
+    \end{twocolentry}
+
+    
+    
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Built DimeNet+ and MACE from scratch for molecular energy prediction, training on AQM dataset and fine-tuning on FreeSolv with ASE-based atomistic workflows
+
+            \item Developed uncertainty-aware prediction pipelines with deep ensembles and systematic benchmarking, improving model reliability and validating performance against leading FreeSolv baselines; achieved a best MAE of 0.418, matching state-of-the-art FreeSolv performance.
+
+
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.04 cm}
+
+    \begin{twocolentry}{\color{primaryColor}\textit{Amherst, MA\\10/2025 -- Present}} % Date/Location in primary color
+        \href{https://websites.umass.edu/yanfeixu/}{\color{primaryColor}\textbf{Advanced Polymer Engineering Laboratory - Professor Yanfei Xu}}
+
+        \color{primaryColor}\textit{Research Assistant} % Italic content in primary color
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Developed Python/PyTorch algorithms for polymer thermal conductivity analysis, deriving material parameters and uncertainty estimates; contributed to data curation, formal analysis, validation, and research methodology.
+
+            \item Curated and analyzed large-scale polymer/crystalline material datasets using Pandas/PyTorch and quantified pore areas with ImageJ, supporting materials characterization and publication-ready research.
+
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.04 cm}
+    
+    \begin{twocolentry}{\color{primaryColor}\textit{Amherst, MA\\09/2025 -- 08/2026}} % Date/Location in primary color
+        \href{https://wsslab.org/batteryless-old-smartphone/}{\color{primaryColor}\textbf{Wireless and Sensor Systems Lab - Professor VP Nguyen}}
+
+        \color{primaryColor}\textit{Research Assistant} % Italic content in primary color
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Engineered a battery-free, solar-powered imaging system website with an automated upload, integrating energy harvesting, on-device image capture, and cloud infrastructure for extended field deployment.
+            
+            \item Optimized YOLOv8n-Nano/NanoDet-Plus for real-time object detection at $\sim$34 FPS on resource-constrained Android devices and developed PyTorch diffusion/GAN pipelines with Gemini API for high-resolution image restoration used in research publications.
+
+        \end{highlights}
+    \end{onecolentry}
+
+   
+    
+    
+
+
+
+
+\section{SOCIAL ACTIVITIES}
+    \begin{twocolentry}{\color{primaryColor}\textit{Amherst, MA\\09/2025 -- 05/2026}} % Date/Location in primary color
+        \href{https://www.buildumass.com/}{\color{primaryColor}\textbf{BUILD UMass}}
+
+        \color{primaryColor}\textit{Software Developer / Interviewer} % Italic content in primary color
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Worked on reducing emergency-response latency for healthcare users by an estimated $\sim$32--51\% by architecting and deploying a scalable backend system for the Kapok mobile application.
+            \item Engineered real-time routing and connection systems using the MapBox API, built the database with Firebase, and designed the frontend with Figma and Flutter, enhancing communication and data management.
+            \item Interviewed software development candidates for the BUILD UMass Spring '26 season using structured technical assessments and behavioral interviews, resulting in the selection of a high-performing cohort that met project staffing goals.
+        \end{highlights}
+    \end{onecolentry}
+
+\section{PROJECTS}
+    \begin{twocolentry}{\textit{04/2026 -- 06/2026}}
+        \color{primaryColor}\textbf{LLM Guardrail} $\vert$ 
+        \href{https://llm-guardrail.onrender.com}{\color{primaryColor}\textbf{Try it out}} $\vert$ 
+        \href{https://github.com/NghiemNgocDuc/LLM-Guardrail.git}{\color{primaryColor}\textbf{Github}} 
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Built a multi-tenant LLM Safety Gateway — designed and implemented a production-grade FastAPI API gateway that sits between applications and LLM providers (OpenAI, Anthropic, Gemini, Groq, Ollama), enforcing per-organization guardrail policies (prompt injection detection, jailbreak prevention, PII redaction/blocking, secret leakage detection, toxic content filtering, and topic-based compliance rules) with Redis-backed rate limiting, full audit logging (PostgreSQL), and JWT + API key authentication.
+            \item Integrated multiple LLM providers, including Groq, OpenAI-compatible APIs, Anthropic, Gemini, Ollama, and mock backends, through a modular provider layer for scalable model routing and testing.
+            \item Hardened the project for public release with Dockerized deployment, environment-based secret management, security headers, ignored credential files, automated migrations, and backend tests.
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.04 cm}
+
+
+    \begin{twocolentry}{\textit{08/2025 -- Present}}
+        \color{primaryColor}\textbf{Drag Soccer with Agent} $\vert$ 
+        \href{https://drag-soccer-with-agent.onrender.com/}{\color{primaryColor}\textbf{Try it out}} $\vert$
+        \href{https://github.com/NghiemNgocDuc/Drag_Soccer_with_Agent}{\color{primaryColor}\textbf{Github}} 
+        
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Built a full-stack multiplayer soccer simulation platform (Flask + Redis + Supabase) featuring real-time 1v1 online play via invite links, friend system, and single-elimination tournaments with auto-advancing AI matches, deployed on Render with 7 built-in AI opponents.
+            \item Created an Agent Skill Vulnerability Scanner — developed a static-analysis engine that scans Cursor skills, MCP instructions, and system prompts for hard-coded secrets (API keys, tokens, credentials), PII, database URLs, private IPs, internal file paths, and 16 destructive shell/SQL command patterns (rm -rf, DROP TABLE, disk wipe, fork bombs, curl-pipe-shell), complete with a web review queue for managing blocked findings, per-user override allow-lists, and git pre-push hooks to prevent leaking sensitive data to GitHub.
+            \item Delivered a Full-Stack Platform with Token-Based Billing — built a React SPA dashboard (14 views including playground, analytics, billing, admin, logs, and policy management) alongside a Stripe-integrated token metering system that tracks per-request LLM token consumption across four paid tiers ($9–$399), with automated low-balance alerts, unlimited-token whitelisting, demo mode with strict rate caps, and Docker Compose deployment ready for Render, Koyeb, or bare-metal hosting.
+        \end{highlights}
+    \end{onecolentry}
+
+\section{HONORS \& AWARDS}
+    \begin{twocolentry}{\textit{02/2026}}
+        \begin{highlights}
+            \item \textbf{Best Use of DigitalOcean} @ Hack(H)er413 2026 -- Built ShareBooth, a browser-based real-time photobooth enabling users worldwide to capture and compose group photos on a shared canvas; implemented client-side photo compositing with the Canvas API and background removal using MediaPipe Selfie Segmentation ($\sim$30fps), and deployed a Node.js/Express backend on DigitalOcean for session management and WebSocket coordination. \href{https://devpost.com/software/sharebooth}{\color{primaryColor}\textbf{[Link]}}
+        \end{highlights}
+    \end{twocolentry}
+    \vspace{0.01 cm}
+    \begin{twocolentry}{\textit{12/2025}}
+        \begin{highlights}
+            \item \textbf{Third Place} @ MassAI's Winter Break Challenge -- Developed a 93.8\% accuracy spam detection model by fine-tuning a BERT model using PyTorch, Python, Pandas, Scikit-Learn, NumPy, Matplotlib, T4 GPU, and Google Colab. \href{https://drive.google.com/file/d/1bab9sEDANkSiQ6V9LCSk-4JHYkVCS-hB/view?usp=sharing}{\color{primaryColor}\textbf{[Link]}}
+        \end{highlights}
+    \end{twocolentry}
+    \vspace{0.01 cm}
+    
+\section{CERTIFICATES}
+    \begin{twocolentry}{\textit{05/2026 - 07/2026}}
+        \begin{highlights}
+            \item \textbf{Software Engineering Job Simulation} @ Hewlett Packard Enterprise \href{https://drive.google.com/file/d/1iJvIiQNItVOZxWZ6VBBic19yz2Na3on2/view?usp=sharing}{\color{primaryColor}\textbf{[Link]}}
+        \end{highlights}
+
+        \begin{highlights}
+            \item \textbf{Advanced Software Engineering Job Simulation} @ Walmart Global Tech\hspace{0.3em}\href{https://drive.google.com/file/d/1qynGV6iEPqKgzxHvRzFGKix1NJ_9T7My/view?usp=sharing}{\color{primaryColor}\textbf{[Link]}}
+        \end{highlights}
+    \end{twocolentry}
+
+\section{SKILLS}
+    \begin{highlights}
+        \item \textbf{Languages:} Python, Java, HTML, CSS, JavaScript, SQL, LaTeX, R
+        \item \textbf{Frameworks:} React, Node.js, Flask, FastAPI, WordPress, AutoCAD, Flutter
+        \item \textbf{Libraries:} Pandas, PyTorch, TensorFlow, NumPy, Matplotlib, OpenCV
+        \item \textbf{Developer Tools:} Git, GitHub, Google Cloud Platform (GCP), AWS, Docker, VS Code, PyCharm, Vim, Windows Terminal, Neo4j, Render, Redis, Stripe, Microsoft Word, Excel, Powerpoint, Microsoft 365, Kubernetes, Origin, ImageJ
+    \end{highlights}
+
+\end{document}
